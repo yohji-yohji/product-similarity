@@ -1,0 +1,75 @@
+# 依赖文件
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 运行时文件
+*.pid
+*.seed
+*.pid.lock
+
+# 环境变量和配置文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.json
+.DS_Store
+
+# 日志文件
+logs/
+*.log
+
+# 上传文件目录
+uploads/
+temp/
+tmp/
+
+# IDE 和编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+Thumbs.db
+.DS_Store
+
+# 测试覆盖率报告
+coverage/
+.nyc_output/
+
+# Python 生成的文件 (如果使用了Python脚本)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 备份文件
+*.bak
+*.backup
+*.old
+
+# 其他敏感文件
+secrets.txt
+api_keys.txt
+private_keys/

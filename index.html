@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品相似度智能检测系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 页面头部 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-search-plus"></i>
+                    <h1>商品相似度AI检测</h1>
+                </div>
+                <p class="subtitle">基于多模态AI技术的智能商品相似度分析平台</p>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main">
+            <!-- 商品上传区域 -->
+            <section class="upload-section">
+                <div class="upload-grid">
+                    <!-- 商品A上传区 -->
+                    <div class="upload-card" id="productA">
+                        <div class="upload-area" id="uploadA">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h3>商品A</h3>
+                                <p>点击或拖拽上传图片</p>
+                                <small>支持 JPG, PNG, WEBP 格式</small>
+                            </div>
+                            <input type="file" id="fileA" accept="image/*" hidden>
+                        </div>
+                        <div class="image-preview" id="previewA" style="display: none;">
+                            <img id="imgA" alt="商品A预览">
+                            <div class="image-actions">
+                                <button class="btn-secondary" id="removeA">
+                                    <i class="fas fa-trash"></i> 删除
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 商品A描述输入区域 -->
+                        <div class="product-description" id="descriptionA">
+                            <label for="productDescA">
+                                <i class="fas fa-tag"></i>
+                                商品A描述
+                            </label>
+                            <textarea 
+                                id="productDescA" 
+                                placeholder="请输入商品A的基础定位描述，如：品牌、类别、功能、特点等..."
+                                rows="2"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- VS 分隔符 -->
+                    <div class="vs-separator">
+                        <div class="vs-circle">
+                            <span>VS</span>
+                        </div>
+                    </div>
+
+                    <!-- 商品B上传区 -->
+                    <div class="upload-card" id="productB">
+                        <div class="upload-area" id="uploadB">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h3>商品B</h3>
+                                <p>点击或拖拽上传图片</p>
+                                <small>支持 JPG, PNG, WEBP 格式</small>
+                            </div>
+                            <input type="file" id="fileB" accept="image/*" hidden>
+                        </div>
+                        <div class="image-preview" id="previewB" style="display: none;">
+                            <img id="imgB" alt="商品B预览">
+                            <div class="image-actions">
+                                <button class="btn-secondary" id="removeB">
+                                    <i class="fas fa-trash"></i> 删除
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 商品B描述输入区域 -->
+                        <div class="product-description" id="descriptionB">
+                            <label for="productDescB">
+                                <i class="fas fa-tag"></i>
+                                商品B描述
+                            </label>
+                            <textarea 
+                                id="productDescB" 
+                                placeholder="请输入商品B的基础定位描述，如：品牌、类别、功能、特点等..."
+                                rows="2"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 提示词配置区域 -->
+                <div class="prompt-section">
+                    <div class="prompt-card">
+                        <h3>
+                            <i class="fas fa-magic"></i>
+                            AI分析提示词配置
+                        </h3>
+                        <textarea 
+                            id="promptInput" 
+                            placeholder="请输入您的自定义提示词，用于指导AI如何分析商品相似度..."
+                            rows="4"
+                        ></textarea>
+                        <div class="prompt-tips">
+                            <i class="fas fa-info-circle"></i>
+                            <span>提示：详细的提示词能帮助AI更准确地分析商品特征和相似度</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分析按钮 -->
+                <div class="action-section">
+                    <button class="btn-primary" id="analyzeBtn" disabled>
+                        <i class="fas fa-brain"></i>
+                        <span>开始AI智能分析</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 结果展示区域 -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-card">
+                    <div class="results-header">
+                        <h2>
+                            <i class="fas fa-chart-line"></i>
+                            相似度分析结果
+                        </h2>
+                        <div class="analysis-time" id="analysisTime"></div>
+                    </div>
+
+                    <!-- 相似度评分 -->
+                    <div class="similarity-score">
+                        <div class="score-circle">
+                            <svg class="score-ring" width="120" height="120">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#e6e6e6" stroke-width="8"></circle>
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#4285f4" stroke-width="8" 
+                                        stroke-dasharray="314" stroke-dashoffset="314" class="score-progress"></circle>
+                            </svg>
+                            <div class="score-text">
+                                <span class="score-value" id="scoreValue">0</span>
+                                <span class="score-percent">%</span>
+                            </div>
+                        </div>
+                        <div class="score-label">相似度评分</div>
+                    </div>
+
+                    <!-- AI详细分析 -->
+                    <div class="analysis-details">
+                        <h3>
+                            <i class="fas fa-robot"></i>
+                            AI详细分析报告
+                        </h3>
+                        <div class="analysis-content" id="analysisContent">
+                            <!-- AI分析结果将显示在这里 -->
+                        </div>
+                    </div>
+
+                    <!-- 重新分析按钮 -->
+                    <div class="results-actions">
+                        <button class="btn-outline" id="resetBtn">
+                            <i class="fas fa-redo"></i>
+                            重新分析
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 加载状态 -->
+            <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                <div class="loading-content">
+                    <div class="loading-spinner"></div>
+                    <h3>AI正在智能分析中...</h3>
+                    <p>请稍候，正在对比商品特征和相似度</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- 页面底部 -->
+        <footer class="footer">
+            <p>&copy; 2024 商品相似度AI检测系统. 由多模态AI技术驱动</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

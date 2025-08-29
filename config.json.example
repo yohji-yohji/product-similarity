@@ -1,0 +1,27 @@
+{
+  "apiUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "apiKey": "YOUR_DASHSCOPE_API_KEY_HERE", 
+  "model": "qwen-vl-max-latest",
+  "_comment": {
+    "setup_instructions": "请按以下步骤配置:",
+    "step1": "1. 复制此文件为 config.json",
+    "step2": "2. 将 YOUR_DASHSCOPE_API_KEY_HERE 替换为您的真实API密钥",
+    "step3": "3. 如需使用其他AI服务，请相应修改 apiUrl 和 model 字段",
+    "dashscope_setup": {
+      "how_to_get_key": "访问 https://dashscope.console.aliyun.com/ 获取API Key",
+      "typical_key_format": "sk-xxxxxxxxxx",
+      "model_options": ["qwen-vl-max-latest", "qwen-vl-plus", "qwen-vl-max"]
+    },
+    "other_providers": {
+      "openai": {
+        "apiUrl": "https://api.openai.com/v1/chat/completions",
+        "model": "gpt-4-vision-preview"
+      },
+      "custom": {
+        "apiUrl": "https://your-custom-api.com/v1/chat/completions",
+        "model": "your-model-name"
+      }
+    },
+    "environment_variables": "您也可以通过环境变量设置: DASHSCOPE_URL, DASHSCOPE_API_KEY, DASHSCOPE_MODEL"
+  }
+}
